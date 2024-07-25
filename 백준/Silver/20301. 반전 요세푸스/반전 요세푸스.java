@@ -7,9 +7,9 @@ public class Main {
         StringBuilder sb = new StringBuilder();
 
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.valueOf(st.nextToken());
-        int k = Integer.valueOf(st.nextToken());
-        int m = Integer.valueOf(st.nextToken());
+        int n = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
         Deque<Integer> q = new ArrayDeque<Integer>();
 
         for(int i=1; i<=n; i++) {
