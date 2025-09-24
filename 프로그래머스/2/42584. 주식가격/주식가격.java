@@ -3,27 +3,20 @@ import java.util.*;
 class Solution {
     public int[] solution(int[] prices) {
         Deque<Integer> dq = new ArrayDeque<>();
-        for (int i=0; i<prices.length; i++) {
-            dq.addLast(prices[i]);
+        int n = prices.length;
+        int[] answer = new int[n];
+        for (int i = 0; i < n; i++) {
+            // 현재 가격이 이전 가격보다 떨어진 순간
+            while (!dq.isEmpty() && prices[dq.peekLast()] > prices[i]) {
+                int idx = dq.pollLast();
+                answer[idx] = i - idx;
+            }
+            dq.addLast(i);
         }
-        int[] answer = new int[prices.length];
-        int index = 0;
+        // 끝까지 가격이 떨어지지 않은 값 정리
         while (!dq.isEmpty()) {
-            int sec = 0;
-            int recent = dq.pollFirst();
-            if (dq.isEmpty()) {
-                answer[index] = 0;
-            } else {
-                for (int price : dq) {
-                    sec++;
-                    if (price < recent) {
-                        break;
-                    }    
-                }
-                // dq 끝에 도달하면 알아서 answer에 return값 추가
-                answer[index] = sec;
-                index++;
-            }       
+            int idx = dq.pollLast();
+            answer[idx] = n - 1 - idx;
         }
         return answer;
     }
